@@ -1,0 +1,48 @@
+:host {
+  background-color: rgb(245, 245, 245);
+  display: grid;
+  grid-template-areas:
+    'header login-state'
+    'user-list chat-area'
+    'user-list chat-input';
+  grid-template-columns: 1fr 3fr;
+  gap: 20px;
+}
+
+.header {
+  grid-area: header;
+}
+.login-state {
+  grid-area: login-state;
+  > * {
+    margin: 1rem;
+  }
+}
+.user-list {
+  grid-area: user-list;
+  padding: 1rem;
+  mat-list-item {
+    &.current-user {
+      background-color: bisque;
+      border-radius: 5px;
+    }
+  }
+}
+.chat-input {
+  grid-area: chat-input;
+  mat-form-field {
+    display: block;
+    max-width: 430px;
+  }
+}
+.chat-area {
+  grid-area: chat-area;
+
+  mat-card {
+    max-width: 400px;
+    margin-bottom: 1rem;
+    &.current-user {
+      background-color: bisque;
+    }
+  }
+}

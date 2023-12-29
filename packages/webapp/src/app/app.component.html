@@ -1,0 +1,42 @@
+<div class="login-state" [ngSwitch]="currentUser === undefined">
+  <ng-container *ngSwitchCase="true">
+    <mat-form-field appearance="standard">
+      <input #userName matInput placeholder="What's your name ?" />
+    </mat-form-field>
+    <button mat-flat-button color="primary" (click)="connect(userName)">
+      Connect
+    </button>
+  </ng-container>
+  <ng-container *ngSwitchCase="false">
+    <h2>Logged in as: {{ currentUser.name }}</h2>
+  </ng-container>
+</div>
+
+<div class="user-list">
+  <h3>Live Users:</h3>
+  <mat-list role="list">
+    <mat-list-item role="listitem" *ngFor="let user of users" [class.current-user]="user.id === currentUser.id"
+      >#{{ user.id }}- {{ user.name }}</mat-list-item
+    >
+  </mat-list>
+</div>
+<div class="chat-area">
+  <mat-card
+    *ngFor="let message of messages"
+    [class.current-user]="message.author.id === currentUser.id"
+  >
+    <mat-card-title>{{ message?.author.name }}</mat-card-title>
+    <mat-card-content>{{ message?.contents }}</mat-card-content>
+  </mat-card>
+  <!-- <pre>{{ messages | json }}</pre> -->
+</div>
+<div class="chat-input">
+  <mat-form-field appearance="outline">
+    <input
+      matInput
+      placeholder="Whats in your mind"
+      #chatInput
+      (keyup.enter)="send(chatInput)"
+    />
+  </mat-form-field>
+</div>
